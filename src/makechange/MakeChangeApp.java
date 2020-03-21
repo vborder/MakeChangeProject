@@ -5,15 +5,6 @@ import java.util.Scanner;
 public class MakeChangeApp {
 
 	public static void main(String[] args) {
-//		In the cash register we will calculate the amount of change
-//		returned to a customer based on the purchase price and the 
-//		amount tendered. We will also notify the attendant how many 
-//		of each piece of currency ($20 ,$10 ,$5 ,$1, .25c, .10c, .05c,
-//		.01c) is needed to make the change for the customer. Change 
-//		should be provided using the largest bill and coin denominations
-//		as possible. Denominations that are not used should not be displayed.
-
-//		Hint: Mod operator
 
 //		User Story #1
 //		The user is prompted asking for the price of the item.
@@ -30,10 +21,6 @@ public class MakeChangeApp {
 //		If the amount tendered is more than the cost of the item, 
 //		display the number of bills and coins that should be given to 
 //		the customer.
-
-//		Grading
-//		This is a graded project. You are expected to have your project
-//		completed by the start of class on Monday morning.
 
 //		You will be given either a pass or fail based on whether your 
 //		code works given all of the following test conditions:
@@ -54,6 +41,7 @@ public class MakeChangeApp {
 //		include a README.md that describes how to run your program.
 		
 		Scanner kb = new Scanner(System.in);
+		double diff = 0;
 		
 		System.out.println("Welcome to the Cash Register!");
 		System.out.println();
@@ -62,6 +50,14 @@ public class MakeChangeApp {
 		
 		System.out.print("How much money did you pay for the item (in dollars and cents)? $");
 		double tender = kb.nextDouble();
+		
+		kb.close();
+		
+		diff = tender - price;
+//		System.out.println(diff);
+		
+		diff = diff * 100;
+//		System.out.println(diff + " converted");
 		System.out.println();
 		
 		if (price == tender) {
@@ -70,42 +66,61 @@ public class MakeChangeApp {
 		} else if (tender < price) {
 			System.out.println("You didn't provide enough money to cover the price of the item."
 					+ " You owe us change!");
-		} else {
-			double diff = tender - price;
-//			System.out.println(diff + " difference");
-			change(diff);
-			System.out.println(change(diff));
+		} 
+		
+		System.out.println("Your change is: ");
+		
+		while (diff != 0) {
+			if (diff > 2000) {
+				int twenty = (int)(diff / 2000);
+				diff = diff % 20.00;
+				System.out.println(twenty + " twenty dollar bills");
+			}  
+			if (diff > 1000) {
+				int ten = (int)(diff / 1000);
+				diff = diff % 1000;
+				System.out.println(ten + " ten dollar bills");
+			}  
+			if (diff > 500) {
+				int five = (int)(diff / 500);
+				diff = diff % 500;
+				System.out.println(five + " five dollar bills");
+			}  
+			if (diff > 100) {
+				int one = (int)(diff / 100);
+				diff = diff % 100;
+				System.out.println(one + " one dollar bills");
+			} 
+			if (diff > 25) {
+				int quarter = (int)(diff / 25);
+				diff = diff % 25;
+				System.out.println(quarter + " quarters");
+			}  
+			if (diff >= 10) {
+				int dime = (int)(diff / 10);
+				diff = diff % 10;
+				System.out.println(dime + " dimes");
+			}  
+			if (diff >= 5) {
+				int nickel = (int)(diff / 5);
+				diff = diff % 5;
+				System.out.println(nickel + " nickels");
+			}  
+			if (diff >= 1) {
+				int penny = (int)(diff / 1 + .5);
+				System.out.println(penny + " pennies");
+				break;
+			} 
 		}
-		
-		System.out.println();
-
-	} 
-	
-	static public double change (double diff) {
-		int counter = 0;
-		int counter20 = 0;
-		int counter10 = 0;
-		int counterT = 0;
-		
-		while (diff >= 20.00) {
-			double change20 = diff - 20.00;
-			counter++;
-			counter20 = counter;
-			System.out.println(counter20);
-		}
-//		while (diff >= 10.00) {
-//			double change10 = diff - 10;
-//			counter++;
-//			counter10 = counter;
-//		}
-		
-		counterT = counter20 + counter10;
-		
-		return counterT;
-		
+//	System.out.println(counter20 + " twenty dollar bills");
+//	System.out.println(counter10 + " ten dollar bills");
+//	System.out.println(counter5 + " five dollar bills");
+//	System.out.println(counter1 + " one dollar bills");
+//	System.out.println(counter25c + " quarters");
+//	System.out.println(counter10c + " dimes");
+//	System.out.println(counter5c + " nickels");
+//	System.out.println(counter1c + " pennies");
 		
 	}
 	
-	
-
 }
